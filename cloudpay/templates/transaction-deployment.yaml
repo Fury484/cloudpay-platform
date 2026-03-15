@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
         - name: transaction-service
-          image: cloudpay-platform-transaction-service:latest
-          imagePullPolicy: Never
+          image: "{{.Values.transactionService.image}}"
+          imagePullPolicy: "{{ .Values.image.pullPolicy }}"
           ports:
             - containerPort: 4000
           resources:

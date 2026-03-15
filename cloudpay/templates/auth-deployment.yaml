@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
         - name: auth-service
-          image: cloudpay-platform-auth-service:latest
-          imagePullPolicy: Never
+          image: "{{.Values.authService.image}}"
+          imagePullPolicy: "{{ .Values.image.pullPolicy }}"
           ports:
             - containerPort: 3000
           env:

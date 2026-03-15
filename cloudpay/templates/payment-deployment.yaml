@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
         - name: payment-service
-          image: cloudpay-platform-payment-service:latest
-          imagePullPolicy: Never
+          image: "{{.Values.paymentService.image}}"
+          imagePullPolicy: "{{ .Values.image.pullPolicy }}"
           env:
             - name: DB_HOST
               value: "postgres"

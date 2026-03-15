@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-and-push:
+  build-push-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -32,3 +32,15 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/cloudpay-payment:latest ./services/payment-service
           docker push ${{ secrets.DOCKER_USERNAME }}/cloudpay-payment:latest
+
+      - name: Configure Kubernetes
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > ~/.kube/config
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+
+      - name: Deploy CloudPay
+        run: |
+          helm upgrade --install cloudpay ./cloudpay
