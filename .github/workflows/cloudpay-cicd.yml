@@ -1,0 +1,22 @@
+name: CloudPay CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Auth Service
+        run: docker build -t cloudpay-auth ./services/auth-service
+
+      - name: Build Transaction Service
+        run: docker build -t cloudpay-transaction ./services/transaction-service
+
+      - name: Build Payment Service
+        run: docker build -t cloudpay-payment ./services/payment-service
