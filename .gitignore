@@ -4,5 +4,4 @@ dist
 build
 .log
 coverage
-Dockerfile
 docker-compose*
